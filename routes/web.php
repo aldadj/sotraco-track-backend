@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminBusController;
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
 // Groupe de routes pour l'administration des bus
