@@ -4,25 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    {{-- Titre dynamique, avec une valeur par défaut --}}
     <title>@yield('title', 'SOTRACO TRACK')</title>
 
-    {{-- On charge notre fichier CSS --}}
+    {{-- Fichiers CSS globaux --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+    {{-- Emplacement pour les styles spécifiques à une page --}}
+    @stack('styles')
 </head>
 <body>
-
-    {{-- On inclut l'en-tête --}}
+    {{-- Inclusion de l'en-tête (navbar) --}}
     @include('partials.header')
 
     <main>
-        {{-- Le contenu spécifique de chaque page viendra ici --}}
+        {{-- Le contenu principal de la page sera injecté ici --}}
         @yield('content')
     </main>
 
-    {{-- On inclut le pied de page --}}
+    {{-- Inclusion du pied de page --}}
     @include('partials.footer')
 
-    {{-- On charge notre fichier JavaScript --}}
+    {{-- Fichiers JavaScript globaux --}}
     <script src="{{ asset('js/main.js') }}"></script>
+    {{-- Emplacement pour les scripts spécifiques à une page --}}
+    @stack('scripts')
 </body>
 </html>
