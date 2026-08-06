@@ -494,15 +494,15 @@ footer{
 
 <nav id="menu">
 
-<a href="/">
+<a href="{{ url('/') }}">
 Accueil
 </a>
 
-<a href="/admin/buses">
+<a href="{{ route('admin.buses.index') }}">
 Administration
 </a>
 
-<a href="#">
+<a href="{{ route('map.index') }}">
 Suivi GPS
 </a>
 
@@ -539,12 +539,12 @@ et améliorer le transport urbain à Ouagadougou.
 <div class="buttons">
 
 
-<a class="btn primary" href="#">
+<a class="btn primary" href="{{ route('map.index') }}">
 📍 Voir les bus
 </a>
 
 
-<a class="btn secondary" href="/admin/buses">
+<a class="btn secondary" href="{{ route('admin.buses.index') }}">
 ⚙ Gestion
 </a>
 
