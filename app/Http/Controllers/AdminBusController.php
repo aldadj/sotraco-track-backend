@@ -13,7 +13,7 @@ class AdminBusController extends Controller
     public function index()
     {
         $buses = Bus::orderBy('number')->get();
-        return view('admin.buses.index', ['buses' => $buses]);
+        return view('admin.buses.index', compact('buses'));
     }
 
     /**
