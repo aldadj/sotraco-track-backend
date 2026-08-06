@@ -1,11 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\AdminBusController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Page de la carte en temps réel
+Route::get('/map', [MapController::class, 'index'])->name('map.index');
 
 // Groupe de routes pour l'administration des bus
 Route::prefix('admin')->name('admin.')->group(function () {
