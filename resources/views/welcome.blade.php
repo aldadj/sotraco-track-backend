@@ -547,29 +547,17 @@ et améliorer le transport urbain à Ouagadougou.
 <a class="btn secondary" href="{{ route('admin.buses.index') }}">
 ⚙ Gestion
 </a>
-
-
 </div>
 
-
 </div>
-
-
-
-
 
 <div class="card">
-
-
 <h2>
 Ajouter un bus
 </h2>
-
-
 <form method="POST" action="/admin/buses">
 
 @csrf
-
 
 <input 
 type="text"
@@ -596,10 +584,7 @@ Ajouter
 
 </form>
 
-
 </div>
-
-
 
 </section>
 
