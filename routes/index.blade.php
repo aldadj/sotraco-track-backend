@@ -1,106 +1,128 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Bus - SOTRACO TRACK</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Gestion des Bus</h1>
+@extends('layouts.app')
 
-        <!-- Section pour les messages de session (succès, erreur) -->
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+@section('title', 'Gestion des Bus')
 
-        <!-- Section pour les erreurs de validation -->
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <strong>Oups !</strong> Il y a eu des problèmes avec votre saisie.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+@push('styles')
+<style>
+    .admin-container {
+        padding: 40px 8%;
+    }
+    .table-container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 40px;
+        overflow-x: auto;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .actions {
+        display: flex;
+        gap: 10px;
+    }
+    .actions a, .actions button {
+        text-decoration: none;
+        font-size: 14px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px 12px;
+        border-radius: 5px;
+        color: white;
+    }
+    .edit-btn { background-color: #FCD116; color: #333; }
+    .delete-btn { background-color: #EF4444; }
+    .actions form {
+        display: inline-block;
+        margin: 0;
+    }
+    .form-container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .form-container h2 {
+        margin-bottom: 20px;
+        color: #00843D;
+    }
+    .alert-success {
+        background-color: #D1FAE5;
+        color: #065F46;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+</style>
+@endpush
 
-        <!-- Formulaire d'ajout de bus -->
-        <div class="card mb-4">
-            <div class="card-header">
-                Ajouter un nouveau bus
-            </div>
-            <div class="card-body">
-                <form action="{{ route('admin.buses.store') }}" method="POST">
-                    @csrf <!-- Protection CSRF obligatoire pour les formulaires Laravel -->
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label for="number" class="form-label">Numéro du bus</label>
-                            <input type="text" class="form-control" id="number" name="number" value="{{ old('number') }}" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="line" class="form-label">Ligne</label>
-                            <input type="text" class="form-control" id="line" name="line" value="{{ old('line') }}" placeholder="Ex: Ligne 12" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="destination" class="form-label">Destination</label>
-                            <input type="text" class="form-control" id="destination" name="destination" value="{{ old('destination') }}" placeholder="Ex: Centre-ville" required>
-                        </div>
-                        <div class="col-md-1 d-flex align-items-end">
-                            <button type="submit" class="btn btn-primary w-100">Ajouter</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+@section('content')
+<div class="admin-container">
+
+    <h1>Gestion des Bus</h1>
+    <br>
+
+    @if(session('success'))
+        <div class="alert-success">
+            {{ session('success') }}
         </div>
+    @endif
 
-        <!-- Liste des bus existants -->
-        <div class="card">
-            <div class="card-header">
-                Liste des bus
-            </div>
-            <div class="card-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Numéro</th>
-                            <th>Ligne</th>
-                            <th>Destination</th>
-                            <th class="text-end">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($buses as $bus)
-                            <tr>
-                                <td>{{ $bus->id }}</td>
-                                <td><strong>{{ $bus->number }}</strong></td>
-                                <td>{{ $bus->line }}</td>
-                                <td>{{ $bus->destination }}</td>
-                                <td class="text-end">
-                                    <div class="d-flex justify-content-end">
-                                        <a href="{{ route('admin.buses.edit', $bus->id) }}" class="btn btn-warning btn-sm me-2">Modifier</a>
-                                        <form action="{{ route('admin.buses.destroy', $bus->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce bus ?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="text-center">Aucun bus enregistré pour le moment.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="table-container">
+        <h2>Liste des bus</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Numéro</th>
+                    <th>Ligne</th>
+                    <th>Destination</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($buses as $bus)
+                    <tr>
+                        <td>{{ $bus->number }}</td>
+                        <td>{{ $bus->line }}</td>
+                        <td>{{ $bus->destination }}</td>
+                        <td class="actions">
+                            <a href="{{ route('admin.buses.edit', $bus) }}" class="edit-btn">Modifier</a>
+                            <form action="{{ route('admin.buses.destroy', $bus) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce bus ?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-btn">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" style="text-align: center;">Aucun bus trouvé.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
-</body>
-</html>
+
+    <div class="form-container card">
+        <h2>Ajouter un nouveau bus</h2>
+        <form action="{{ route('admin.buses.store') }}" method="POST">
+            @csrf
+            <input type="text" name="number" placeholder="Numéro du bus" required value="{{ old('number') }}">
+            <input type="text" name="line" placeholder="Ligne" required value="{{ old('line') }}">
+            <input type="text" name="destination" placeholder="Destination" required value="{{ old('destination') }}">
+            <button type="submit">Ajouter le bus</button>
+        </form>
+    </div>
+</div>
+@endsection
