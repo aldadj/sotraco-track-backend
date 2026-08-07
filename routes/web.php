@@ -3,10 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\AdminBusController;
+use App\Models\Bus;
 
 // Page d'accueil
 Route::get('/', function () {
-    return view('index');
+
+    // Récupérer tous les bus enregistrés
+    $buses = Bus::orderBy('number')->get();
+
+    return view('index', compact('buses'));
+
 })->name('home');
 
 // Page de gestion des bus
@@ -23,6 +29,11 @@ Route::get('/tracking/map', function () {
 
 // Page de la carte en temps réel
 Route::get('/tracking', [MapController::class, 'index'])->name('tracking.map');
+
+// Récupérer la dernière position d'un bus
+Route::get('/tracking/bus/{bus}', 
+[MapController::class,'bus'])
+->name('tracking.bus');
 
 // Groupe de routes pour l'administration des bus
 Route::prefix('admin')

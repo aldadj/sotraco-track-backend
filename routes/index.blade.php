@@ -369,27 +369,54 @@ method="POST">
 @method('PATCH')
 
 
+@foreach($buses as $bus)
+
+<div class="bus-card">
+
+<h3>
+🚌 Bus N° {{ $bus->number }}
+</h3>
+
+
+<p>
+Ligne : {{ $bus->line }}
+</p>
+
+
+<p>
+Destination : {{ $bus->destination }}
+</p>
+
+
 @if($bus->is_tracking)
 
+<p class="online">
+🟢 GPS actif
+</p>
 
-<button class="gps-stop">
-
-🔴 Stop GPS
-
-</button>
+<a href="{{ route('tracking.map') }}">
+📍 Suivre en direct
+</a>
 
 
 @else
 
+<p class="pause">
+🟡 En pause
+</p>
 
-<button class="gps-btn">
-
-🟢 Activer GPS
-
-</button>
+<a href="#">
+ℹ Voir les informations
+</a>
 
 
 @endif
+
+
+</div>
+
+
+@endforeach
 
 
 
