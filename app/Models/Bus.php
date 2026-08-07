@@ -6,23 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bus extends Model
 {
+
     protected $fillable = [
 
-    'number',
+        'number',
+        'line',
+        'destination',
+        'is_tracking',
+        'latitude',
+        'longitude',
+        'last_update'
 
-    'line',
+    ];
 
-    'destination',
-
-    'is_tracking',
-
-    'latitude',
-
-    'longitude',
-
-    'last_update'
-
-];
 
 
     public function locations()
@@ -31,8 +27,18 @@ class Bus extends Model
     }
 
 
+
+    public function latestLocation()
+    {
+        return $this->hasOne(BusLocation::class)
+                    ->latestOfMany();
+    }
+
+
+
     public function activeTracker()
     {
         return $this->hasOne(ActiveTracker::class);
     }
+
 }

@@ -12,6 +12,8 @@ class MapController extends Controller
      */
     public function bus(Bus $bus)
     {
+        $bus->load('latestLocation');
+
         return view('tracking.bus', compact('bus'));
     }
     /**
