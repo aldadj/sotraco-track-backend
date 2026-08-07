@@ -9,6 +9,10 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+Route::get('/tracking/map', function () {
+    return view('tracking.map');
+})->name('map.index');
+
 // Page de la carte en temps réel
 Route::get('/tracking', [MapController::class, 'index'])->name('tracking.map');
 
