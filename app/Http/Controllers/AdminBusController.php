@@ -70,4 +70,26 @@ class AdminBusController extends Controller
 
         return redirect()->route('admin.buses.index')->with('success', 'Bus supprimé avec succès !');
     }
+
+    /**
+     * Active ou désactive le suivi GPS d'un bus.
+     */
+    public function toggleTracking(Bus $bus)
+    {
+
+        $bus->update([
+
+            'is_tracking' => !$bus->is_tracking
+
+        ]);
+
+
+        return redirect()
+            ->route('admin.buses.index')
+            ->with(
+                'success',
+                'Statut GPS du bus modifié'
+            );
+
+    }
 }

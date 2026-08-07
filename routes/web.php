@@ -9,6 +9,14 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
+// Page de gestion des bus
+Route::patch(
+    '/admin/buses/{bus}/tracking',
+    [AdminBusController::class,'toggleTracking']
+)
+->name('admin.buses.tracking');
+
+// Page de la carte
 Route::get('/tracking/map', function () {
     return view('tracking.map');
 })->name('map.index');
