@@ -13,7 +13,22 @@ Route::get('/', function () {
 Route::get('/tracking', [MapController::class, 'index'])->name('tracking.map');
 
 // Groupe de routes pour l'administration des bus
-Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
-    // Utilisation de Route::resource pour simplifier la déclaration des routes CRUD
-    Route::resource('buses', AdminBusController::class)->except(['show']);
+Route::prefix('admin')
+    ->group(function () {
+
+    Route::get('/buses', [AdminBusController::class,'index'])
+        ->name('admin.buses.index');
+
+    Route::post('/buses', [AdminBusController::class,'store'])
+        ->name('admin.buses.store');
+
+    Route::get('/buses/{bus}/edit', [AdminBusController::class,'edit'])
+        ->name('admin.buses.edit');
+
+    Route::put('/buses/{bus}', [AdminBusController::class,'update'])
+        ->name('admin.buses.update');
+
+    Route::delete('/buses/{bus}', [AdminBusController::class,'destroy'])
+        ->name('admin.buses.destroy');
+
 });
