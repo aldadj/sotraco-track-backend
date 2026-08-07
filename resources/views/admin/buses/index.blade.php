@@ -41,78 +41,77 @@
 
             <tbody>
 
-
-            @forelse($buses as $bus)
-
+                @forelse($buses as $bus)
+                
                 <tr>
-
-                    <td>
+                
+                    <td data-label="Numéro">
                         {{ $bus->number }}
                     </td>
-
-
-                    <td>
+                
+                
+                    <td data-label="Ligne">
                         {{ $bus->line }}
                     </td>
-
-
-                    <td>
+                
+                
+                    <td data-label="Destination">
                         {{ $bus->destination }}
                     </td>
-
-
-                    <td class="actions">
-
-
-                        <a href="{{ route('admin.buses.edit',$bus) }}"
-                           class="edit-btn">
-                            Modifier
-                        </a>
-
-
-
-                        <form action="{{ route('admin.buses.destroy',$bus) }}"
-                              method="POST">
-
-                            @csrf
-                            @method('DELETE')
-
-
-                            <button class="delete-btn">
-
-                                Supprimer
-
-                            </button>
-
-
-                        </form>
-
-
+                
+                
+                    <td data-label="Actions">
+                
+                        <div class="actions">
+                
+                
+                            <a href="{{ route('admin.buses.edit',$bus) }}"
+                               class="edit-btn">
+                                ✏️ Modifier
+                            </a>
+                
+                
+                
+                            <form action="{{ route('admin.buses.destroy',$bus) }}"
+                                  method="POST">
+                
+                                @csrf
+                                @method('DELETE')
+                
+                
+                                <button type="submit"
+                                        class="delete-btn">
+                                    🗑 Supprimer
+                                </button>
+                
+                
+                            </form>
+                
+                
+                        </div>
+                
                     </td>
-
-
+                
+                
                 </tr>
-
-
-
-            @empty
-
-
+                
+                
+                @empty
+                
+                
                 <tr>
-
+                
                     <td colspan="4">
                         Aucun bus trouvé.
                     </td>
-
+                
                 </tr>
-
-
-            @endforelse
-
-
-            </tbody>
-
-
+                
+                
+                @endforelse
+                
+                
+                </tbody>
         </table>
 
 
