@@ -1,8 +1,8 @@
 <header>
 
-    <div class="logo">
-    🚌 SOTRACO TRACK
-    </div>
+    <a href="{{ route('home') }}" class="logo">
+        <img src="{{ asset('images/sotraco-logo.png') }}" alt="SOTRACO">
+    </a>
     
     
     <div class="menu-btn" onclick="toggleMenu()">

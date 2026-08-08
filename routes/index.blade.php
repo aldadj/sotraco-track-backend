@@ -202,7 +202,7 @@ button[type="submit"] {
 <div class="admin-container">
 
 
-<h1>🚌 Gestion des Bus</h1>
+<h1> Gestion des Bus</h1>
 
 
 <br>
@@ -373,9 +373,14 @@ method="POST">
 
 <div class="bus-card">
 
-<h3>
-🚌 Bus N° {{ $bus->number }}
-</h3>
+    <h1 class="tracking-title">
+        <img
+            src="{{ asset('images/sotraco-bus.png') }}"
+            alt="SOTRACO"
+        >
+    
+        Suivi du Bus N° {{ $bus->number }}
+    </h1>
 
 
 <p>

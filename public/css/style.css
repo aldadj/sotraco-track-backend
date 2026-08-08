@@ -59,12 +59,23 @@ header{
 
 
 
-.logo{
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
 
-    font-size:28px;
+.logo img {
+    width: 150px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
 
-    font-weight:800;
-
+@media (max-width: 600px) {
+    .logo img {
+        width: 120px;
+    }
 }
 
 
@@ -105,6 +116,256 @@ nav a:hover{
 .menu-btn{
 
     display:none;
+
+}
+
+/* ================= BUS DISPONIBLES ================= */
+
+.bus-section {
+    width: 90%;
+    max-width: 1400px;
+    margin: 70px auto;
+    padding: 20px 0;
+    background: transparent;
+}
+
+/* Titre + logo SOTRACO */
+.bus-section h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    color: #00843D;
+    font-size: 34px;
+    font-weight: 800;
+
+    margin-bottom: 45px;
+    background: transparent;
+}
+
+/* Logo SOTRACO */
+.bus-section h2 img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    display: inline-block;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+/* ================= LISTE DES BUS ================= */
+
+.bus-container {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(280px, 1fr));
+
+    gap: 30px;
+}
+
+/* ================= CARTE BUS ================= */
+
+.bus-card {
+    background: #ffffff;
+
+    padding: 32px 28px;
+
+    border-radius: 22px;
+
+    text-align: center;
+
+    border-top: 5px solid #00843D;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.bus-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.13);
+}
+
+/* ================= ICÔNE BUS ================= */
+
+.bus-icon {
+    width: 80px;
+    height: 80px;
+
+    margin: 0 auto 20px;
+
+    background: #e7f6ee;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 40px;
+}
+
+/* ================= TITRE BUS ================= */
+
+.bus-card h3 {
+    color: #00843D;
+
+    font-size: 23px;
+    font-weight: 800;
+
+    margin-bottom: 20px;
+}
+
+/* ================= INFORMATIONS ================= */
+
+.bus-card p {
+    margin: 10px 0;
+
+    color: #666;
+
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.bus-card strong {
+    color: #333;
+}
+
+/* ================= GPS ACTIF ================= */
+
+.online {
+    display: inline-block;
+
+    margin: 18px 0;
+
+    padding: 9px 18px;
+
+    border-radius: 30px;
+
+    background: #dcfce7;
+
+    color: #15803d;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+/* ================= GPS INACTIF ================= */
+
+.offline {
+    display: inline-block;
+
+    margin: 18px 0;
+
+    padding: 9px 18px;
+
+    border-radius: 30px;
+
+    background: #fee2e2;
+
+    color: #dc2626;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+/* ================= BOUTON SUIVRE ================= */
+
+.follow-btn {
+    display: block;
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 5px;
+
+    background: #00843D;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    border-radius: 12px;
+
+    font-weight: 700;
+
+    transition: all 0.3s ease;
+}
+
+.follow-btn:hover {
+    background: #006b31;
+
+    transform: translateY(-2px);
+}
+
+/* ================= BOUTON INDISPONIBLE ================= */
+
+.bus-card button {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #d1d5db;
+
+    color: #6b7280;
+
+    font-weight: 700;
+
+    cursor: not-allowed;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .bus-section {
+        width: 94%;
+        margin: 50px auto;
+    }
+
+    .bus-section h2 {
+        font-size: 27px;
+        gap: 8px;
+
+        margin-bottom: 30px;
+    }
+
+    /* Logo encore plus petit sur téléphone */
+    .bus-section h2 img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .bus-container {
+        grid-template-columns: 1fr;
+
+        gap: 22px;
+    }
+
+    .bus-card {
+        padding: 28px 22px;
+    }
+
+    .bus-icon {
+        width: 75px;
+        height: 75px;
+
+        font-size: 36px;
+    }
 
 }
 
@@ -293,10 +554,15 @@ nav a:hover{
 }
 
 
+.bus-icon img {
+    width: 70px;
+    height: auto;
+    object-fit: contain;
+}
 
 .bus-icon{
 
-    width:95px;
+    width:15px;
 
     height:95px;
 
@@ -1074,6 +1340,28 @@ header{
 nav{
 
     display:none;
+
+    /* Positionnement du menu déroulant */
+    position: absolute;
+    top: 100%; /* Juste en dessous du header */
+    left: 0;
+    width: 100%;
+
+    background: #007a37; /* Un vert légèrement plus sombre pour le différencier */
+    flex-direction: column;
+    text-align: center;
+
+    padding: 15px 0;
+
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+
+}
+
+
+/* Quand le menu est actif, on l'affiche en flex */
+nav.active {
+
+    display: flex;
 
 }
 

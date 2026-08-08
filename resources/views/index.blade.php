@@ -13,7 +13,7 @@
 
 
         <h1>
-            🚌 Suivez les bus SOTRACO en temps réel
+            Suivez les bus SOTRACO en temps réel
         </h1>
 
 
@@ -62,9 +62,9 @@
 
 
 <h2>
-
-🚌 Bus disponibles
-
+    <img
+    src="{{ asset('images/sotraco-bus.png') }}"
+    alt="SOTRACO">Bus disponibles
 </h2>
 
 
@@ -87,9 +87,10 @@
 
 
 <div class="bus-icon">
-
-🚌
-
+    <img
+    src="{{ asset('images/sotraco-bus.png') }}"
+    alt="SOTRACO"
+>
 </div>
 
 

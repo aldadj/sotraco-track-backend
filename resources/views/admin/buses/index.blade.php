@@ -8,7 +8,7 @@
 <div class="admin-container">
 
 
-    <h1>🚌 Gestion des Bus</h1>
+    <h1>Gestion des Bus</h1>
 
 
 
